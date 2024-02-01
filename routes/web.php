@@ -19,14 +19,14 @@ Route::get('/', function () {
 });
 
 use App\Http\Controllers\ServiceController;
+Route::resource('services', ServiceController::class);
+// Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 
-Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+// Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
 
-Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+// Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
 
-Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
-
-Route::get('/services/{id}', [ServiceController::class, 'show'])->name('services.show');
+// Route::get('/services/{id}', [ServiceController::class, 'show'])->name('services.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

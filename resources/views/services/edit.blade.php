@@ -1,60 +1,12 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un Nouveau Service</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-</head>
-<body class="bg-gradient-to-b from-blue-500 via-blue-700 to-blue-900 min-h-screen flex items-center justify-center">
-    <div class="max-w-md w-full bg-white p-6 rounded-md shadow-md">
-        <h1 class="text-3xl font-bold mb-6 text-gray-800">Créer un Nouveau Service</h1>
-
-        <form action="{{ route('services.store') }}" method="post">
-            @csrf
-
-            <div class="mb-4">
-                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Titre:</label>
-                <input type="text" name="title" required
-                    class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-            </div>
-
-            <div class="mb-4">
-                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-                <textarea name="description" required
-                    class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"></textarea>
-            </div>
-
-            <div class="mb-4">
-                <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Catégorie:</label>
-                <input type="text" name="category" required
-                    class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-            </div>
-
-            <div class="mb-4">
-                <label for="cost" class="block text-gray-700 text-sm font-bold mb-2">Coût:</label>
-                <input type="number" name="cost"
-                    class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-            </div>
-
-            <button type="submit"
-                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-                Enregistrer
-            </button>
-        </form>
-    </div>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Créer un Nouveau Service</title>
+    <title>Modifier le Service</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
 </head>
-<body class="bg-gradient-to-b from-blue-500 via-blue-700 to-blue-900 min-h-screen flex flex-col">
+<body class="bg-gradient-to-b from-blue-500 via-blue-700 to-blue-900 min-h-screen">
     <!-- Navbar -->
     <nav class="bg-white border-b border-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
@@ -110,45 +62,40 @@
 
     <!-- Main Content -->
     <div class="flex-grow flex items-center justify-center mt-8">
-        <div class="max-w-md w-full bg-white p-6 rounded-md shadow-lg bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300">
-            <h1 class="text-3xl font-bold mb-6 text-blue-900">Créer un Nouveau Service</h1>
+        <div class="max-w-md w-full bg-white p-6 rounded-md shadow-md">
+            <h1 class="text-3xl font-extrabold mb-6 text-gray-800 text-center">Modifier le Service</h1>
 
-            <form action="{{ route('services.store') }}" method="post" class="mt-4">
+            <form action="{{ route('services.update', $service->id) }}" method="post">
                 @csrf
+                @method('PUT')
 
                 <div class="mb-4">
                     <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Titre:</label>
-                    <input type="text" name="title" required
-                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                    <input type="text" name="title" value="{{ $service->title }}" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
                 </div>
 
                 <div class="mb-4">
                     <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-                    <textarea name="description" required
-                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"></textarea>
+                    <textarea name="description" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>{{ $service->description }}</textarea>
                 </div>
 
                 <div class="mb-4">
                     <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Catégorie:</label>
-                    <input type="text" name="category" required
-                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                    <input type="text" name="category" value="{{ $service->category }}" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500" required>
                 </div>
 
                 <div class="mb-4">
                     <label for="cost" class="block text-gray-700 text-sm font-bold mb-2">Coût:</label>
-                    <input type="number" name="cost"
-                        class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                    <input type="number" name="cost" value="{{ $service->cost }}" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
                 </div>
 
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-4">
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
                     Enregistrer
                 </button>
             </form>
         </div>
     </div>
-
-    <div class="hidden sm:hidden">
-    </div>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 </body>
 </html>
+
