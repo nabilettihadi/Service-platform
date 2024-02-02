@@ -19,18 +19,28 @@
                 </div>
             </div>
 
-            <!-- Navigation Links -->
-            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <a href="{{ route('services.index') }}" class="text-gray-500 hover:text-gray-700">Services</a>
-            </div>
-
             <!-- Hamburger -->
-            <div class="-me-2 flex items-center sm:hidden">
-                <button class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
+            <div x-data="{ isOpen: false }" class="-me-2 flex items-center sm:hidden">
+                <button @click="isOpen = !isOpen" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
                 </button>
+                <div x-show="isOpen" @click.away="isOpen = false" class="absolute top-16 right-0 mt-2 w-48 bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
+                    <a href="{{ route('services.index') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Services</a>
+                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none">
+                            Logout
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <a href="{{ route('services.index') }}" class="text-gray-500 hover:text-gray-700">Services</a>
             </div>
 
             <!-- Settings Dropdown -->
@@ -60,48 +70,47 @@
     </nav>
 
     <!-- Main Content -->
-<!-- Formulaire de création -->
-<div class="flex-grow flex items-center justify-center mt-8">
-    <div class="max-w-md w-full bg-white p-6 rounded-md shadow-md">
-        <h1 class="text-3xl font-extrabold mb-6 text-gray-800 text-center">Créer un Nouveau Service</h1>
+    <!-- Formulaire de création -->
+    <div class="flex-grow flex items-center justify-center mt-8">
+        <div class="max-w-md w-full bg-white p-6 rounded-md shadow-md">
+            <h1 class="text-3xl font-extrabold mb-6 text-gray-800 text-center">Créer un Nouveau Service</h1>
 
-        <form action="{{ route('services.store') }}" method="post" class="mt-4">
-            @csrf
+            <form action="{{ route('services.store') }}" method="post" class="mt-4">
+                @csrf
 
-            <div class="mb-4">
-                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Titre:</label>
-                <input type="text" name="title" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-            </div>
+                <div class="mb-4">
+                    <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Titre:</label>
+                    <input type="text" name="title" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                </div>
 
-            <div class="mb-4">
-                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-                <textarea name="description" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"></textarea>
-            </div>
+                <div class="mb-4">
+                    <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                    <textarea name="description" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"></textarea>
+                </div>
 
-            <div class="mb-4">
-                <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Catégorie:</label>
-                <input type="text" name="category" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-            </div>
+                <div class="mb-4">
+                    <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Catégorie:</label>
+                    <input type="text" name="category" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                </div>
 
-            <div class="mb-4">
-                <label for="cost" class="block text-gray-700 text-sm font-bold mb-2">Coût:</label>
-                <input type="number" name="cost" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-            </div>
+                <div class="mb-4">
+                    <label for="cost" class="block text-gray-700 text-sm font-bold mb-2">Coût:</label>
+                    <input type="number" name="cost" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+                </div>
 
-            <!-- Boutons de navigation -->
-            <div class="flex items-center justify-between mt-4">
-                <a href="{{ route('services.index') }}" class="text-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300">
-                    Retour
-                </a>
-            
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
-                    Enregistrer
-                </button>
-            </div>
-        </form>
+                <!-- Boutons de navigation -->
+                <div class="flex items-center justify-between mt-4">
+                    <a href="{{ route('services.index') }}" class="text-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300">
+                        Retour
+                    </a>
+
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
+                        Enregistrer
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-
 
     <div class="hidden sm:hidden">
     </div>
