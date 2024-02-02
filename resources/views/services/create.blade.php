@@ -108,39 +108,49 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="flex-grow flex items-center justify-center mt-8">
-        <div class="max-w-md w-full bg-white p-6 rounded-md shadow-lg bg-gradient-to-b from-blue-100 via-blue-200 to-blue-300">
-            <h1 class="text-3xl font-bold mb-6 text-blue-900">Créer un Nouveau Service</h1>
+<!-- Formulaire de création -->
+<div class="flex-grow flex items-center justify-center mt-8">
+    <div class="max-w-md w-full bg-white p-6 rounded-md shadow-md">
+        <h1 class="text-3xl font-extrabold mb-6 text-gray-800 text-center">Créer un Nouveau Service</h1>
 
-            <form action="{{ route('services.store') }}" method="post" class="mt-4">
-                @csrf
+        <form action="{{ route('services.store') }}" method="post" class="mt-4">
+            @csrf
 
-                <div class="mb-4">
-                    <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Titre:</label>
-                    <input type="text" name="title" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-                </div>
+            <!-- Les champs communs avec le formulaire d'édition -->
+            <div class="mb-4">
+                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Titre:</label>
+                <input type="text" name="title" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+            </div>
 
-                <div class="mb-4">
-                    <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-                    <textarea name="description" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"></textarea>
-                </div>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                <textarea name="description" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"></textarea>
+            </div>
 
-                <div class="mb-4">
-                    <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Catégorie:</label>
-                    <input type="text" name="category" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-                </div>
+            <div class="mb-4">
+                <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Catégorie:</label>
+                <input type="text" name="category" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+            </div>
 
-                <div class="mb-4">
-                    <label for="cost" class="block text-gray-700 text-sm font-bold mb-2">Coût:</label>
-                    <input type="number" name="cost" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-                </div>
+            <div class="mb-4">
+                <label for="cost" class="block text-gray-700 text-sm font-bold mb-2">Coût:</label>
+                <input type="number" name="cost" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+            </div>
 
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 mt-4">
+            <!-- Boutons de navigation -->
+            <div class="flex items-center justify-between mt-4">
+                <a href="{{ route('services.index') }}" class="text-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue transition duration-300">
+                    Retour
+                </a>
+            
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600">
                     Enregistrer
                 </button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
+</div>
+
 
     <div class="hidden sm:hidden">
     </div>
