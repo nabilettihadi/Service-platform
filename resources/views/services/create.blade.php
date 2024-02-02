@@ -68,7 +68,6 @@
         <form action="{{ route('services.store') }}" method="post" class="mt-4">
             @csrf
 
-            <!-- Les champs communs avec le formulaire d'édition -->
             <div class="mb-4">
                 <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Titre:</label>
                 <input type="text" name="title" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
